@@ -1,0 +1,68 @@
+/* Universal CSS Styling */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html {
+    margin:0;
+    padding:0;
+    height:100%;
+    width:100%;
+}
+
+body {
+    height:100%;
+    width:100%;
+    /* overflow-x: hidden;  */
+}
+
+.navbar-content {
+    font-size:100%;
+}
+
+.navbar-logo {
+    width:15%;
+}
+
+#index-logo {
+    width:100%;
+}
+
+/* Start of index.html CSS Styling */
+
+#total-cases-title {
+    color:rgb(59, 59, 59);
+    font-size:200%;
+}
+
+.data-title {
+    color:rgb(59, 59, 59);
+    font-size:200%;
+    font-family: 'Roboto', sans-serif;
+    text-align:center;
+}
+
+#total-cases-value {
+    font-size:200%;
+    max-width:50%;
+    color:rgb(58, 179, 58);
+    text-align:center;
+    margin:auto;
+}
+
+#new-cases-value {
+    font-size:200%;
+    max-width:50%;
+    color:rgb(248, 176, 42);
+    text-align:center;
+    margin:auto;
+}
+
+#death-value {
+    font-size:200%;
+    max-width:50%;
+    color:rgb(212, 0, 0);
+    text-align:center;
+    margin:auto;
+}
+
+/* End of index.html CSS Styling */
