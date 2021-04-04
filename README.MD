@@ -1,4 +1,4 @@
-<h1>PokePlanner</h1>
+<h1>COVID-Tracker</h1>
 
 Name: Lim Jia Wei <br>
 Website URL: <br>
