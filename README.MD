@@ -58,17 +58,25 @@ Date        | Description                                               | Status
 
 * HTML
 * CSS
+* Javascript
+* jQuery
 
 
 <h3>APIs/Libraries Used</h3>
 
 * Bootstrap - https://getbootstrap.com/
+* Postman COVID19 API - https://documenter.getpostman.com/view/10808728/SzS8rjbc#00030720-fae3-4c72-8aea-ad01ba17adf8
+* VACCOVID - https://rapidapi.com/vaccovidlive-vaccovidlive-default/api/vaccovid-coronavirus-vaccine-and-treatment-tracker?endpoint=apiendpoint_6375a299-4403-4aa7-8de4-09299db11f1f
+
 
 
 <h3>Media</h3>
 
 
 <h2>Links</h2>
+
+* Google Fonts - https://fonts.google.com/
+
 
 <h2>Acknowledgements</h2>
 
