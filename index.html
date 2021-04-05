@@ -10,7 +10,7 @@
 
 </head>
 
-<body>
+<body id="index-body">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -29,7 +29,7 @@
                 <a class="nav-link active navbar-content" href="updates.html"><b>News/Updates</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active navbar-content" href="history.html"><b>About</b></a>
+                <a class="nav-link active navbar-content" href="about.html"><b>About</b></a>
               </li>
             </ul>
             <span class="navbar-text">
@@ -42,21 +42,21 @@
           </div>
         </div>
     </nav>
-
-    <div class="container">
+    <div id="data-summary-container">
+      <div class="container">
         <div class="row">
-          <div class="col-sm index-col" > 
-              <div class="data-title">
-                Total Cases
-              </div>
-              <div id="total-cases-value">
-
-              </div>
-              
-          </div>
           <div class="col-sm index-col">
             <div class="data-title">
-                New Cases
+                NEW RECOVERED
+            </div>
+            <div class="recovered-cases" id="new-recovered-value">
+
+            </div>
+          </div>
+          
+          <div class="col-sm index-col">
+            <div class="data-title">
+                NEW CASES
             </div>
             <div id="new-cases-value">
 
@@ -64,14 +64,184 @@
           </div>
           <div class="col-sm index-col">
             <div class="data-title">
-                Total Deaths
+                TOTAL DEATHS
             </div>
-            <div id="death-value">
+            <div class="death-value" id="death-value">
 
             </div>
           </div>
         </div>
       </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm index-col" > 
+              <div class="data-title">
+                TOTAL RECOVERED
+              </div>
+              <div class="recovered-cases" id="total-recovered-value">
+
+              </div>
+              
+          </div>
+
+          <div class="col-sm index-col" > 
+            <div class="data-title">
+              TOTAL CASES
+            </div>
+            <div id="total-cases-value">
+
+            </div>
+            
+        </div>
+          
+          <div class="col-sm index-col">
+            <div class="data-title">
+                NEW DEATHS
+            </div>
+            <div class="death-value" id="new-death-value">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col country-title">
+          MALAYSIA
+        </div>
+        <div class="col country-title">
+          SINGAPORE
+        </div>
+        <div class="col country-title">
+          INDONESIA
+        </div>
+        <div class="col country-title">
+          ISRAEL
+        </div>
+      </div>
+      <div class="row">
+        <div class="col country-content">
+          <img src="https://www.countryflags.io/my/flat/64.png">
+          <div class="row">
+            <div class="recovered-cases" id="recovered-cases-malaysia"></div>
+
+          <div class="secondary-data-title">
+            RECOVERED CASES
+          </div>
+          <div class="cases-content" id="new-cases-malaysia">
+            +
+          </div>
+          <div class="secondary-data-title">
+            NEW CASES
+          </div>
+          <div class="active-cases-content" id="active-cases-malaysia">
+            
+          </div>
+          <div class="secondary-data-title">
+            ACTIVE CASES
+          </div>
+          <div class="death-value" id="total-deaths-malaysia">
+
+          </div>
+          
+          <div class="secondary-data-title">
+            TOTAL DEATHS
+          </div>
+            
+    
+          </div>
+        </div>
+        
+        <div class="col country-content" > 
+          <img src="https://www.countryflags.io/sg/flat/64.png">
+          <div class="recovered-cases" id="recovered-cases-singapore"></div>
+
+          <div class="secondary-data-title">
+            RECOVERED CASES
+          </div>
+          <div class="cases-content" id="total-cases-singapore">
+
+          </div>
+          <div class="secondary-data-title">
+            CONFIRMED CASES
+          </div>
+          <div class="active-cases-content" id="active-cases-singapore">
+
+          </div>
+          <div class="secondary-data-title">
+            ACTIVE CASES
+          </div>
+          <div class="death-value" id="total-deaths-singapore">
+
+          </div>
+          <div class="secondary-data-title">
+            TOTAL DEATHS
+          </div>
+          
+          
+        </div>
+        
+        <div class="col country-content">
+          <img src="https://www.countryflags.io/id/flat/64.png">
+          <div class="recovered-cases" id="recovered-cases-indonesia"></div>
+
+          <div class="secondary-data-title">
+            RECOVERED CASES
+          </div>
+          <div class="cases-content" id="total-cases-indonesia">
+
+          </div>
+          <div class="secondary-data-title">
+            CONFIRMED CASES
+          </div>
+          <div class="active-cases-content" id="active-cases-indonesia">
+
+          </div>
+          <div class="secondary-data-title">
+            ACTIVE CASES
+          </div>
+          <div class="death-value" id="total-deaths-indonesia">
+
+          </div>
+          <div class="secondary-data-title">
+            TOTAL DEATHS
+          </div>
+          
+
+        </div>
+        <div class="col country-content">
+          <img src="https://www.countryflags.io/il/flat/64.png">
+          <div class="recovered-cases" id="recovered-cases-israel"></div>
+
+          <div class="secondary-data-title">
+            RECOVERED CASES
+          </div>
+          <div class="cases-content" id="total-cases-israel">
+
+          </div>
+          <div class="secondary-data-title">
+            CONFIRMED CASES
+          </div>
+          <div class="active-cases-content" id="active-cases-israel">
+
+          </div>
+          <div class="secondary-data-title">
+            ACTIVE CASES
+          </div>
+          <div class="death-value" id="total-deaths-israel">
+
+          </div>
+          <div class="secondary-data-title">
+            TOTAL DEATHS
+          </div>
+
+        </div>
+      </div>
+    </div>
+      
 
 
 
