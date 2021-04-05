@@ -5,18 +5,16 @@
 html {
     margin:0;
     padding:0;
-    height:100%;
-    width:100%;
-}
-
-body {
-    height:100%;
-    width:100%;
+    background-color:rgb(46, 46, 46);
     /* overflow-x: hidden;  */
 }
 
+#index-body {
+    background-color:rgb(46, 46, 46);
+}
+
 .navbar-content {
-    font-size:100%;
+    font-size:150%;
 }
 
 .navbar-logo {
@@ -29,19 +27,18 @@ body {
 
 /* Start of index.html CSS Styling */
 
-#total-cases-title {
-    color:rgb(59, 59, 59);
-    font-size:200%;
+#data-summary-container {
+    padding:2%;
 }
 
 .data-title {
-    color:rgb(59, 59, 59);
+    color:rgb(211, 211, 211);
     font-size:200%;
     font-family: 'Roboto', sans-serif;
     text-align:center;
 }
 
-#total-cases-value {
+.recovered-cases {
     font-size:200%;
     max-width:50%;
     color:rgb(58, 179, 58);
@@ -49,7 +46,8 @@ body {
     margin:auto;
 }
 
-#new-cases-value {
+#new-cases-value,
+#total-cases-value {
     font-size:200%;
     max-width:50%;
     color:rgb(248, 176, 42);
@@ -57,12 +55,40 @@ body {
     margin:auto;
 }
 
-#death-value {
+.death-value {
     font-size:200%;
     max-width:50%;
     color:rgb(212, 0, 0);
     text-align:center;
     margin:auto;
+}
+
+.country-title {
+    color:white;
+    font-family: 'Roboto', sans-serif;
+    font-size:200%;
+    text-align:center;
+}
+
+.country-content {
+    color:white;
+    font-family: 'Roboto', sans-serif;
+    font-size:100%;
+    text-align:center;
+}
+
+.cases-content {
+    color:rgb(248, 176, 42);
+    text-align:center;
+    margin:auto;
+    font-size:180%;
+}
+
+.active-cases-content {
+    color:rgb(202, 131, 0);
+    text-align:center;
+    margin:auto;
+    font-size:180%;
 }
 
 /* End of index.html CSS Styling */
