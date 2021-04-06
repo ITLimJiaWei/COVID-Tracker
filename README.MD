@@ -12,6 +12,7 @@ Website URL: <br>
 Date        | Description                                               | Status
 ----------- | --------------------------------------------------------- | ------
 4/4/2021    | Selection of APIs and Tools                               |  Done 
+6/4/2021    | Tested searchCountry function                             |  Done 
  
  
 
