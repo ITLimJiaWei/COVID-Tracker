@@ -1,11 +1,13 @@
 /* Universal CSS Styling */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); /* Roboto 400  */
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');  /* Lato 400  */
 
 html {
     margin:0;
     padding:0;
     background-color:rgb(46, 46, 46);
+    /* height:100%; */
     /* overflow-x: hidden;  */
 }
 
@@ -14,7 +16,7 @@ html {
 }
 
 .navbar-content {
-    font-size:150%;
+    font-size:130%;
 }
 
 .navbar-logo {
@@ -64,7 +66,7 @@ html {
 }
 
 .country-title {
-    color:white;
+    color:rgb(0, 204, 204);
     font-family: 'Roboto', sans-serif;
     font-size:200%;
     text-align:center;
@@ -89,6 +91,36 @@ html {
     text-align:center;
     margin:auto;
     font-size:180%;
+}
+
+#index-divider1 {
+    text-align:center;
+    color:rgb(0, 204, 204);
+    font-family: 'Lato', sans-serif;
+    font-size:200%;
+    padding:2%;
+}
+
+.country-input-class {
+    border:0px;
+    display:block;
+    margin:auto;
+    width:25%;
+    font-family: 'Roboto', sans-serif;
+    height:4vh;
+    outline:none
+}
+
+#country-search-name {
+    text-align:center;
+    color:rgb(0, 204, 204);
+    font-size:150%;
+}
+
+.country-search-name-class {
+    text-align:center;
+    color:rgb(0, 204, 204);
+    font-size:150%;
 }
 
 /* End of index.html CSS Styling */
