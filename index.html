@@ -64,9 +64,9 @@
           </div>
           <div class="col-sm index-col">
             <div class="data-title">
-                TOTAL DEATHS
+                NEW DEATHS
             </div>
-            <div class="death-value" id="death-value">
+            <div class="death-value" id="new-death-value">
 
             </div>
           </div>
@@ -77,7 +77,7 @@
         <div class="row">
           <div class="col-sm index-col" > 
               <div class="data-title">
-                TOTAL RECOVERED
+                RECOVERED
               </div>
               <div class="recovered-cases" id="total-recovered-value">
 
@@ -87,7 +87,7 @@
 
           <div class="col-sm index-col" > 
             <div class="data-title">
-              TOTAL CASES
+              CASES
             </div>
             <div id="total-cases-value">
 
@@ -97,9 +97,9 @@
           
           <div class="col-sm index-col">
             <div class="data-title">
-                NEW DEATHS
+                DEATHS
             </div>
-            <div class="death-value" id="new-death-value">
+            <div class="death-value" id="death-value">
 
             </div>
           </div>
@@ -129,17 +129,24 @@
             <div class="recovered-cases" id="recovered-cases-malaysia"></div>
 
           <div class="secondary-data-title">
-            RECOVERED CASES
+            RECOVERED
           </div>
           <div class="cases-content" id="new-cases-malaysia">
-            +
+            
           </div>
           <div class="secondary-data-title">
             NEW CASES
           </div>
+          <div class="cases-content" id="confirmed-cases-malaysia">
+            
+          </div>
+          <div class="secondary-data-title">
+            TOTAL CASES
+          </div>
           <div class="active-cases-content" id="active-cases-malaysia">
             
           </div>
+          
           <div class="secondary-data-title">
             ACTIVE CASES
           </div>
@@ -160,13 +167,19 @@
           <div class="recovered-cases" id="recovered-cases-singapore"></div>
 
           <div class="secondary-data-title">
-            RECOVERED CASES
+            RECOVERED
+          </div>
+          <div class="cases-content" id="new-cases-singapore">
+            
+          </div>
+          <div class="secondary-data-title">
+            NEW CASES
           </div>
           <div class="cases-content" id="total-cases-singapore">
 
           </div>
           <div class="secondary-data-title">
-            CONFIRMED CASES
+            TOTAL CASES
           </div>
           <div class="active-cases-content" id="active-cases-singapore">
 
@@ -189,7 +202,13 @@
           <div class="recovered-cases" id="recovered-cases-indonesia"></div>
 
           <div class="secondary-data-title">
-            RECOVERED CASES
+            RECOVERED
+          </div>
+          <div class="cases-content" id="new-cases-indonesia">
+            
+          </div>
+          <div class="secondary-data-title">
+            NEW CASES
           </div>
           <div class="cases-content" id="total-cases-indonesia">
 
@@ -217,7 +236,13 @@
           <div class="recovered-cases" id="recovered-cases-israel"></div>
 
           <div class="secondary-data-title">
-            RECOVERED CASES
+            RECOVERED
+          </div>
+          <div class="cases-content" id="new-cases-israel">
+            
+          </div>
+          <div class="secondary-data-title">
+            NEW CASES
           </div>
           <div class="cases-content" id="total-cases-israel">
 
@@ -242,7 +267,54 @@
       </div>
     </div>
       
+    <div id="index-divider1">
+      Inquire on a specific country
+    </div>
+    <form id="search-form">
+      <input type="text" class="country-input-class" id="country-input" placeholder="Enter country name" required><br>
+    </form>
+    
 
+    <div id="country-search-div">
+      <div class="row justify-content-center">
+        <div class="col-2">
+          <div class="country-search-name-class" id="country-search-name">
+            COUNTRY NAME
+          </div>
+          
+          <div id="country-search-flag">
+            -
+          </div>
+          
+        </div>
+        <div class="col-2">
+          <div class="country-search-name-class">
+            NEW CASES
+          </div>
+          
+        </div>
+        <div class="col-2">
+          <div class="country-search-name-class">
+            CASES
+          </div>
+          
+        </div>
+        <div class="col-2">
+          <div class="country-search-name-class">
+            FATALITY RATE
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="country-search-name-class">
+            DEATHS
+          </div>
+        </div>
+        <div class="col-2">
+          DEATHS
+        </div>
+      </div>
+
+    </div>
 
 
 
