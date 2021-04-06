@@ -23,6 +23,8 @@ Date        | Description                                               | Status
 
 <h2>Features</h2>
 
+* CountrySearch - COVID-Tracker allows users to search for specific countries and inquire on their COVID-19 statistics such as new cases and death rates.
+
 
 <h3>Future Features</h3>
 
