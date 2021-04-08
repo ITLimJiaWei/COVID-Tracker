@@ -48,8 +48,7 @@ html {
     margin:auto;
 }
 
-#new-cases-value,
-#total-cases-value {
+.cases-value {
     font-size:200%;
     max-width:50%;
     color:rgb(248, 176, 42);
@@ -101,6 +100,12 @@ html {
     padding:2%;
 }
 
+.secondary-data-title {
+    text-align:center;
+    margin:auto;
+    font-family: 'Roboto', sans-serif;
+}
+
 .country-input-class {
     border:0px;
     display:block;
@@ -111,16 +116,20 @@ html {
     outline:none
 }
 
-#country-search-name {
+#country-search-name,
+.country-search-placeholder {
     text-align:center;
     color:rgb(0, 204, 204);
     font-size:150%;
 }
 
-.country-search-name-class {
-    text-align:center;
-    color:rgb(0, 204, 204);
-    font-size:150%;
+
+#country-search-flag {
+    text-align:center
+}
+
+.chart {
+    padding:1%;
 }
 
 /* End of index.html CSS Styling */
