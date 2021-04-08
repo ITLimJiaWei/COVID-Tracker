@@ -1,16 +1,15 @@
 
-var currentDateTime = new Date();
-console.log(currentDateTime.getDate())
-currentDateTime.setDate(currentDateTime.getDate()-1)
-console.log(currentDateTime.getDate())
-var currentDateTimeMinusOneISO = currentDateTime.toISOString();
-// console.log(currentDateTimeMinusOneISO);
-//Tue Apr 06 2021 22:38:53 GMT+0800 (Singapore Standard Time)
 
-// var currentDateTimeMinusOneISO = currentDateTimeMinusOne.toISOString();
 
 $(document).ready(function () {
 
+
+  //Used for 4 main country statistics  (Idea to randomize the statistics)
+  var currentDateTime = new Date();
+  currentDateTime.setDate(currentDateTime.getDate()-2)
+  var currentDateTimeMinusOneISO = currentDateTime.toISOString();
+
+  //Used for CountrySearch Feature
   var currentDate = new Date();
   var ISOcurrentDate = currentDate.toISOString();
   
@@ -49,7 +48,7 @@ $(document).ready(function () {
   }); 
 
   var singapore = {
-    "url": "https://api.covid19api.com/live/country/singapore/status/confirmed/date/" + currentDateTimeMinusOne,           //Retrieving Singapore Data
+    "url": "https://api.covid19api.com/live/country/singapore/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving Singapore Data
     "method": "GET",
     "timeout": 0,
   };
@@ -66,7 +65,7 @@ $(document).ready(function () {
   });
 
   var indonesia = {
-    "url": "https://api.covid19api.com/live/country/indonesia/status/confirmed/date/" + currentDateTimeMinusOne,           //Retrieving Indonesia Data
+    "url": "https://api.covid19api.com/live/country/indonesia/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving Indonesia Data
     "method": "GET",
     "timeout": 0,
   };
@@ -83,7 +82,7 @@ $(document).ready(function () {
   });
 
   var israel = {
-    "url": "https://api.covid19api.com/live/country/israel/status/confirmed/date/" + currentDateTimeMinusOne,           //Retrieving Israel Data
+    "url": "https://api.covid19api.com/live/country/israel/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving Israel Data
     "method": "GET",
     "timeout": 0,
   };
@@ -105,15 +104,12 @@ $(document).ready(function () {
     console.log(countryName)                    //TESTING (TO BE REMOVED)
     
     var countrySearch = {
-      "url": "https://api.covid19api.com/live/country/" + countryName + "/status/confirmed/date/" + currentDateTimeMinusOne,           //Retrieving countrySearch Name data
+      "url": "https://api.covid19api.com/live/country/" + countryName + "/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving countrySearch Name data
       "method": "GET",
       "timeout": 0,
-      
-
     };
     
     $.ajax(countrySearch).done(function (response) {
-      // console.log(response[response.length-1].Recovered);  //TESTING (TO BE REMOVED)
       var i;
       var currentDateObj = new Date();
       var currentDateMinusOneObj = new Date();
@@ -126,6 +122,9 @@ $(document).ready(function () {
       currentDateMinusOneObj.setDate(currentDateMinusOneObj.getDate()-1)
       currentDateMinusOneObj.setHours(8,0,0,0);
       currentDateObj.setHours(8,0,0,0);
+
+          
+
       for (i = 0 ; i <response.length; i++) {
         
         ISOdate = new Date(response[i].Date);
@@ -165,11 +164,11 @@ $(document).ready(function () {
         
       }
 
+
       var newCases = totalCases - totalCasesMinusOne;
       var newDeaths = totalDeaths - totalDeathsMinusOne;
-  
 
-      $("#country-search-name").empty();                 //Note (Add loading animation)
+      $("#country-search-name").empty();                                                      //Note (Add loading animation)
       $("#country-search-name").append(response[response.length-1].Country.toUpperCase())     
       $("#country-search-flag").empty();
       $("#country-search-flag").append("<img src='https://www.countryflags.io/"+ response[0].CountryCode.toLowerCase()  + "/flat/64.png'>")
@@ -178,7 +177,7 @@ $(document).ready(function () {
       $("#country-search-cases").empty();
       $("#country-search-cases").append(totalCases);
       $("#country-search-fatality-rate").empty();
-      $("#country-search-fatality-rate").append((totalDeaths/totalCases).toFixed(3) + "%");
+      $("#country-search-fatality-rate").append((totalDeaths/totalCases).toFixed(4) + "%");
       $("#country-search-death").empty();
       $("#country-search-death").append(newDeaths);
       $("#country-search-total-deaths").empty();
@@ -189,8 +188,163 @@ $(document).ready(function () {
 
   }
 
-  const form = document.getElementById('search-form');
-  form.addEventListener('submit',countrySearch)
+  function countrySearchChart(e) {
+    e.preventDefault();
+    $("#myChart-div").empty();
+    $("#myChart-div").append('<canvas class="chart" id="myChart2" width="400" height="150"></canvas>');
+    var countryName = $("#country-input").val();
+    
+    
+    var countrySearchChart = {
+      "url": "https://api.covid19api.com/live/country/"+ countryName + "/status/confirmed",     //Retrieving countrySearch Name data
+      "method": "GET",
+      "timeout": 0,
+    };  
+    
+    $.ajax(countrySearchChart).done(function (response) {     
+    var labelArray = new Array();     
+    var dataArray = new Array();                                          //countrySearchChart Function (Note: Add in US,UK etc functionality!!!!)
+    var tempArray = new Array();
+    for (i = 1 ; i < response.length; i++) {
+      var ctx2 = $('#myChart2');
+      
+      ISOdate = new Date(response[i].Date);  //Converting ISO to Date Object
+      year = ISOdate.getFullYear();
+      month = ISOdate.getMonth()+1;
+      dt = ISOdate.getDate();  
+      if (dt < 10) {
+        dt = '0' +  dt;
+      }
+
+      if (month < 10) {
+        month = '0' + month;
+      }
+
+      // if (response[i].Date.toString()===response[i+1].Date.toString()) {           //Think of a new method to account for US,UK
+      //   NewCases += response[i].Confirmed                     //Append to a separate array then calculate new cases from there
+      // }
+      
+      stringDate = dt + "/" + month + "/" + year ;
+      labelArray.push(stringDate);
+      dataArray.push(response[i].Confirmed-response[i-1].Confirmed);    //(Note: Add in US,UK etc functionality!!!!)
+    }
+
+    var myChart = new Chart(ctx2, {
+
+      type: 'bar',
+      data: {
+
+        labels: labelArray,
+        datasets: [{
+            label: '# of Confirmed Cases',
+            data: dataArray,
+            backgroundColor: [
+                'rgb(0, 160, 160)'
+            ],
+            borderColor: [
+                'rgba(0, 156, 156, 0.2)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      scales: {
+          y: {
+              beginAtZero: true
+
+            }
+          }
+        }
+      });
+
+
+
+    });
+
+
+  }
+
+    
+
+
+
+  const form = document.getElementById('search-form');      //Functionality for CountrySearch SearchBar
+  form.addEventListener('submit',countrySearch);
+  form.addEventListener('submit',countrySearchChart);
+
+  // color:rgb(0, 156, 156);
+  // Chartjs
+
+  var testMY = {
+    "url": "https://api.covid19api.com/live/country/malaysia",
+    "method": "GET",
+    "timeout": 0,
+  };
+  
+  $.ajax(testMY).done(function (response) {
+    console.log(response);
+    var labelArray = new Array();
+    var dataArray = new Array();
+    var newCases = 0;
+    for (i = 1 ; i < response.length; i++) {
+      var ctx = $('#myChart');
+
+      ISOdate = new Date(response[i].Date);  //Converting ISO to Date Object
+      year = ISOdate.getFullYear();
+      month = ISOdate.getMonth()+1;
+      dt = ISOdate.getDate();  
+      if (dt < 10) {
+        dt = '0' +  dt;
+      }
+
+      if (month < 10) {
+        month = '0' + month;
+      }
+      
+      stringDate = dt + "/" + month + "/" + year ;
+
+      
+
+      labelArray.push(stringDate);
+      dataArray.push(response[i].Confirmed-response[i-1].Confirmed);
+    }
+
+    var myChart = new Chart(ctx, {
+
+      type: 'bar',
+      data: {
+
+        labels: labelArray,
+        datasets: [{
+            label: '# of Confirmed Cases',
+            data: dataArray,
+            backgroundColor: [
+                'rgb(0, 160, 160)'
+            ],
+            borderColor: [
+                'rgba(0, 156, 156, 0.2)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      scales: {
+          y: {
+              beginAtZero: true
+
+            }
+          }
+        }
+      });
+
+
+    
+  });
+
+  //Continue coding here
+
+
+
 
 });
 
