@@ -29,6 +29,23 @@ html {
 
 /* Start of index.html CSS Styling */
 
+.intro-header {
+    text-align:start;
+    color:rgb(0, 204, 204);
+    font-family: 'Lato', sans-serif;
+    font-size:200%;
+    padding:2%;
+}
+
+.intro-para {
+    color:rgb(0, 204, 204);
+    font-family: 'Roboto', sans-serif;
+}
+
+.chart {
+    
+}
+
 #data-summary-container {
     padding:2%;
 }
@@ -92,13 +109,7 @@ html {
     font-size:180%;
 }
 
-#index-divider1 {
-    text-align:center;
-    color:rgb(0, 204, 204);
-    font-family: 'Lato', sans-serif;
-    font-size:200%;
-    padding:2%;
-}
+
 
 .secondary-data-title {
     text-align:center;
@@ -110,7 +121,7 @@ html {
     border:0px;
     display:block;
     margin:auto;
-    width:25%;
+    width:100%;
     font-family: 'Roboto', sans-serif;
     height:4vh;
     outline:none
@@ -128,8 +139,6 @@ html {
     text-align:center
 }
 
-.chart {
-    padding:1%;
-}
+
 
 /* End of index.html CSS Styling */
