@@ -6,13 +6,17 @@ $(document).ready(function () {
 
   //Used for 4 main country statistics  (Idea to randomize the statistics)
   var currentDateTime = new Date();
-  currentDateTime.setDate(currentDateTime.getDate()-2)
+  currentDateTime.setDate(currentDateTime.getDate()-3)
   var currentDateTimeMinusOneISO = currentDateTime.toISOString();
 
   //Used for CountrySearch Feature
   var currentDate = new Date();
   var ISOcurrentDate = currentDate.toISOString();
-  
+
+  //Used for CountrySearch Chart
+  var MinusFourMonthsDate = new Date();
+  MinusFourMonthsDate.setMonth(MinusFourMonthsDate.getMonth()-4);
+  var ISOMinusFourMonthsDate = MinusFourMonthsDate.toISOString();
 
   var settings = {
     "url": "https://api.covid19api.com/summary",
@@ -119,7 +123,8 @@ $(document).ready(function () {
       var totalDeathsMinusOne = 0;
       var totalCases = 0;
       var totalDeaths = 0;
-      currentDateMinusOneObj.setDate(currentDateMinusOneObj.getDate()-1)
+      currentDateMinusOneObj.setDate(currentDateMinusOneObj.getDate()-2)
+      currentDateObj.setDate(currentDateObj.getDate()-1)
       currentDateMinusOneObj.setHours(8,0,0,0);
       currentDateObj.setHours(8,0,0,0);
 
@@ -148,6 +153,7 @@ $(document).ready(function () {
         var countrySearchDateObj = new Date(countrySearchDate);
         if (countrySearchDateObj.toString()===currentDateObj.toString() ) {
           totalCases += response[i].Confirmed;
+          console.log(totalCases);
           totalDeaths += response[i].Deaths;
         } 
         else {
@@ -156,6 +162,7 @@ $(document).ready(function () {
         
         if (countrySearchDateObj.toString()===currentDateMinusOneObj.toString()) {
           totalCasesMinusOne += response[i].Confirmed; 
+          
           totalDeathsMinusOne += response[i].Deaths;
         }
         else {
@@ -167,6 +174,7 @@ $(document).ready(function () {
 
       var newCases = totalCases - totalCasesMinusOne;
       var newDeaths = totalDeaths - totalDeathsMinusOne;
+      
 
       $("#country-search-name").empty();                                                      //Note (Add loading animation)
       $("#country-search-name").append(response[response.length-1].Country.toUpperCase())     
@@ -191,20 +199,28 @@ $(document).ready(function () {
   function countrySearchChart(e) {
     e.preventDefault();
     $("#myChart-div").empty();
-    $("#myChart-div").append('<canvas class="chart" id="myChart2" width="400" height="150"></canvas>');
+    $("#myChart-div").append('<canvas class="chart" id="myChart2" width="400" height="200"></canvas>');
     var countryName = $("#country-input").val();
     
     
     var countrySearchChart = {
-      "url": "https://api.covid19api.com/live/country/"+ countryName + "/status/confirmed",     //Retrieving countrySearch Name data
+      "url": "https://api.covid19api.com/total/country/"+ countryName + "/status/confirmed?from=" + ISOMinusFourMonthsDate + "&to=" + ISOcurrentDate,     //Retrieving countrySearch Name data
       "method": "GET",
       "timeout": 0,
+      //https://api.covid19api.com/total/country/singapore/status/confirmed?from=2021-01-01T00:00:00Z&to=2021-04-01T00:00:00Z
     };  
     
-    $.ajax(countrySearchChart).done(function (response) {     
+    $.ajax(countrySearchChart).done(function (response) {
+      console.log(response)     
     var labelArray = new Array();     
     var dataArray = new Array();                                          //countrySearchChart Function (Note: Add in US,UK etc functionality!!!!)
-    var tempArray = new Array();
+    
+      
+
+    //https://api.covid19api.com/live/country/south-africa/status/confirmed/date/2020-03-21T13:13:30Z
+
+
+
     for (i = 1 ; i < response.length; i++) {
       var ctx2 = $('#myChart2');
       
@@ -219,14 +235,10 @@ $(document).ready(function () {
       if (month < 10) {
         month = '0' + month;
       }
-
-      // if (response[i].Date.toString()===response[i+1].Date.toString()) {           //Think of a new method to account for US,UK
-      //   NewCases += response[i].Confirmed                     //Append to a separate array then calculate new cases from there
-      // }
       
       stringDate = dt + "/" + month + "/" + year ;
       labelArray.push(stringDate);
-      dataArray.push(response[i].Confirmed-response[i-1].Confirmed);    //(Note: Add in US,UK etc functionality!!!!)
+      dataArray.push(response[i].Cases-response[i-1].Cases);    //(Note: Add in US,UK etc functionality!!!!)
     }
 
     var myChart = new Chart(ctx2, {
@@ -236,15 +248,15 @@ $(document).ready(function () {
 
         labels: labelArray,
         datasets: [{
-            label: '# of Confirmed Cases',
+            label: '# of New Cases',      
             data: dataArray,
             backgroundColor: [
                 'rgb(0, 160, 160)'
             ],
             borderColor: [
-                'rgba(0, 156, 156, 0.2)'
+                'rgb(0, 160, 160)'
             ],
-            borderWidth: 1
+            borderWidth: 0
         }]
     },
     options: {
@@ -272,17 +284,15 @@ $(document).ready(function () {
   form.addEventListener('submit',countrySearch);
   form.addEventListener('submit',countrySearchChart);
 
-  // color:rgb(0, 156, 156);
-  // Chartjs
 
-  var testMY = {
-    "url": "https://api.covid19api.com/live/country/malaysia",
+  // Chartjs
+  var testSG = {
+    "url": "https://api.covid19api.com/live/country/singapore",
     "method": "GET",
     "timeout": 0,
   };
   
-  $.ajax(testMY).done(function (response) {
-    console.log(response);
+  $.ajax(testSG).done(function (response) {
     var labelArray = new Array();
     var dataArray = new Array();
     var newCases = 0;
@@ -316,7 +326,7 @@ $(document).ready(function () {
 
         labels: labelArray,
         datasets: [{
-            label: '# of Confirmed Cases',
+            label: '# of New Cases',
             data: dataArray,
             backgroundColor: [
                 'rgb(0, 160, 160)'
