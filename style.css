@@ -40,6 +40,9 @@ html {
 .intro-para {
     color:rgb(0, 204, 204);
     font-family: 'Roboto', sans-serif;
+    font-size:1.9vh;
+    /* border: 2px darkgrey solid;
+    padding:1%; */
 }
 
 .chart {

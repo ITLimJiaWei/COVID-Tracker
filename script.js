@@ -1,30 +1,48 @@
 
 
-
 $(document).ready(function () {
+
 
 
   //Used for 4 main country statistics  (Idea to randomize the statistics)
   var currentDateTime = new Date();
   currentDateTime.setDate(currentDateTime.getDate()-3)
   var currentDateTimeMinusOneISO = currentDateTime.toISOString();
+  var countryArray = new Array();    
+  var country2 = "";
+
 
   //Used for CountrySearch Feature
   var currentDate = new Date();
   var ISOcurrentDate = currentDate.toISOString();
+  var i;
+  var currentDateObj = new Date();
+  var currentDateMinusOneObj = new Date();
+  var totalNewCases = 0;
+  var totalNewCasesMinusOne = 0;
+  var totalCasesMinusOne = 0;
+  var totalDeathsMinusOne = 0;
+  var totalCases = 0;
+  var totalDeaths = 0;
+  currentDateMinusOneObj.setDate(currentDateMinusOneObj.getDate()-2)
+  currentDateObj.setDate(currentDateObj.getDate()-1)
+  currentDateMinusOneObj.setHours(8,0,0,0);
+  currentDateObj.setHours(8,0,0,0);
 
   //Used for CountrySearch Chart
   var MinusFourMonthsDate = new Date();
   MinusFourMonthsDate.setMonth(MinusFourMonthsDate.getMonth()-4);
   var ISOMinusFourMonthsDate = MinusFourMonthsDate.toISOString();
 
-  var settings = {
+ 
+
+  var summary = {
     "url": "https://api.covid19api.com/summary",
     "method": "GET",
     "timeout": 0,
   };
   
-  $.ajax(settings).done(function (response) {                                     //Retrieving Global Data  
+  $.ajax(summary).done(function (response) {                                     //Retrieving Global Data  
     $("#total-cases-value").append(response.Global.TotalConfirmed);
     $("#new-cases-value").append("+"+response.Global.NewConfirmed);
     $("#death-value").append(response.Global.TotalDeaths);
@@ -34,78 +52,182 @@ $(document).ready(function () {
   });
 
 
-  var malaysia = {
-    "url": "https://api.covid19api.com/live/country/malaysia",           //Retrieving Malaysia Data
+  var countries = {
+    "url": "https://api.covid19api.com/countries",
     "method": "GET",
     "timeout": 0,
   };
-  
-  $.ajax(malaysia).done(function (response) {
-    console.log(response);                        //TESTING (TO BE REMOVED)
-    $("#recovered-cases-malaysia").append(response[response.length-1].Recovered);
-    $("#total-deaths-malaysia").append(response[response.length-1].Deaths);
-    var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
-    var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed;     
-    $("#confirmed-cases-malaysia").append(response[response.length-1].Confirmed)
-    $("#active-cases-malaysia").append(active_cases);
-    $("#new-cases-malaysia").append("+"+new_cases);
-  }); 
 
-  var singapore = {
-    "url": "https://api.covid19api.com/live/country/singapore/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving Singapore Data
-    "method": "GET",
-    "timeout": 0,
-  };
   
-  $.ajax(singapore).done(function (response) {
-    console.log(response);                        //TESTING (TO BE REMOVED)
-    $("#recovered-cases-singapore").append(response[response.length-1].Recovered);
-    $("#total-cases-singapore").append(response[response.length-1].Confirmed);
-    var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
-    var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
-    $("#new-cases-singapore").append("+"+new_cases);
-    $("#total-deaths-singapore").append(response[response.length-1].Deaths);
-    $("#active-cases-singapore").append(active_cases);
-  });
+  
+  $.ajax(countries).done(function (response) {
+    var counter1 = Math.floor(Math.random() * response.length);
+    var counter2 = Math.floor(Math.random() * response.length);
+    var counter3 = Math.floor(Math.random() * response.length);
+    var counter4 = Math.floor(Math.random() * response.length);
+    country1 = response[counter1].Country;
+    country2 = response[counter2].Country;
+    country3 = response[counter3].Country;
+    country4 = response[counter4].Country;
+    countryArray.push(response[counter1].ISO2);
+    countryArray.push(response[counter2].ISO2);
+    countryArray.push(response[counter3].ISO2);
+    countryArray.push(response[counter4].ISO2);
+    $("#country-random1").append(country1);
+    $("#country-random2").append(country2);
+    $("#country-random3").append(country3);
+    $("#country-random4").append(country4);
 
-  var indonesia = {
-    "url": "https://api.covid19api.com/live/country/indonesia/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving Indonesia Data
-    "method": "GET",
-    "timeout": 0,
-  };
-  
-  $.ajax(indonesia).done(function (response) {
-    console.log(response);                        //TESTING (TO BE REMOVED)
-    $("#recovered-cases-indonesia").append(response[response.length-1].Recovered);
-    $("#total-cases-indonesia").append(response[response.length-1].Confirmed);
-    $("#total-deaths-indonesia").append(response[response.length-1].Deaths);
-    var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
-    var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
-    $("#new-cases-indonesia").append("+"+new_cases);
-    $("#active-cases-indonesia").append(active_cases);
-  });
+    console.log(response[counter1].ISO2);
+    $("#country-flag1").append("<img src='https://www.countryflags.io/"+ response[counter1].ISO2  + "/flat/64.png'>")
+    $("#country-flag2").append("<img src='https://www.countryflags.io/"+ response[counter2].ISO2  + "/flat/64.png'>")
+    $("#country-flag3").append("<img src='https://www.countryflags.io/"+ response[counter3].ISO2  + "/flat/64.png'>")
+    $("#country-flag4").append("<img src='https://www.countryflags.io/"+ response[counter4].ISO2  + "/flat/64.png'>")
 
-  var israel = {
-    "url": "https://api.covid19api.com/live/country/israel/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving Israel Data
-    "method": "GET",
-    "timeout": 0,
-  };
-  
-  $.ajax(israel).done(function (response) {
-    console.log(response);                        //TESTING (TO BE REMOVED)
-    $("#recovered-cases-israel").append(response[response.length-1].Recovered);
-    $("#total-cases-israel").append(response[response.length-1].Confirmed);
-    $("#total-deaths-israel").append(response[response.length-1].Deaths);
-    var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
-    var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
-    $("#new-cases-israel").append("+"+new_cases);
-    $("#active-cases-israel").append(active_cases);
+
+
+    console.log(countryArray);
+
+    var countryRandom1 = {
+      "url": "https://api.covid19api.com/live/country/"+ countryArray[0] +"/status/confirmed/date/" + currentDateTimeMinusOneISO,       
+      "method": "GET",
+      "timeout": 0,
+    };
+
+    $.ajax(countryRandom1).done(function (response) {
+      console.log(response[0].Province);
+      if (response[0].Province === "") {
+        $("#recovered-cases-country1").append(response[response.length-1].Recovered);
+        $("#total-deaths-country1").append(response[response.length-1].Deaths);
+        var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
+        var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed;     
+        $("#confirmed-cases-country1").append(response[response.length-1].Confirmed)
+        $("#active-cases-country1").append(active_cases);
+        $("#new-cases-country1").append("+"+new_cases);
+      }
+      else {
+        console.log("PROVINCE PRESENT");
+      }
+
+      
+    });  
+
+
+    var countryRandom2 = {
+      "url": "https://api.covid19api.com/live/country/"+ countryArray[1] +"/status/confirmed/date/" + currentDateTimeMinusOneISO,           
+      "method": "GET",
+      "timeout": 0,
+    };
+    
+    $.ajax(countryRandom2).done(function (response) {
+
+      if (!response[0].Province) {
+
+        $("#recovered-cases-country2").append(response[response.length-1].Recovered);
+        $("#total-cases-country2").append(response[response.length-1].Confirmed);
+        var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
+        var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
+        $("#new-cases-country2").append("+"+new_cases);
+        $("#total-deaths-country2").append(response[response.length-1].Deaths);
+        $("#active-cases-country2").append(active_cases);
+      }
+
+      else {
+        console.log("PROVINCE PRESENT")
+        // var provinceCountries = {
+        //   "url": "https://api.covid19api.com/total/country/us/status/confirmed",
+        //   "method": "GET",
+        //   "timeout": 0,
+        // };
+        
+        // $.ajax(provinceCountries).done(function (response) {
+        
+        //   $("#recovered-cases-country2").append(response[response.length-1].Recovered);
+        //   $("#total-cases-country2").append(response[response.length-1].Confirmed);
+        //   var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
+        //   var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
+        //   $("#new-cases-country2").append("+"+new_cases);
+        //   $("#total-deaths-country2").append(response[response.length-1].Deaths);
+        //   $("#active-cases-country2").append(active_cases);
+
+
+        // });    
+        
+      }
+    });
+
+    var countryRandom3 = {
+      "url": "https://api.covid19api.com/live/country/"+ countryArray[2] +"/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving Indonesia Data
+      "method": "GET",
+      "timeout": 0,
+    };
+    
+    $.ajax(countryRandom3).done(function (response) {
+
+      if (!response[0].Province) {
+        $("#recovered-cases-country3").append(response[response.length-1].Recovered);
+        $("#total-cases-country3").append(response[response.length-1].Confirmed);
+        $("#total-deaths-country3").append(response[response.length-1].Deaths);
+        var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
+        var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
+        $("#new-cases-country3").append("+"+new_cases);
+        $("#active-cases-country3").append(active_cases);
+      }
+      else {
+        console.log("PROVINCE PRESENT")
+      }
+    });
+
+    var countryRandom4 = {
+      "url": "https://api.covid19api.com/live/country/"+ countryArray[3] +"/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving Israel Data
+      "method": "GET",
+      "timeout": 0,
+    };
+    
+    $.ajax(countryRandom4).done(function (response) {
+
+      if (response[0].Province === "") {
+        $("#recovered-cases-country4").append(response[response.length-1].Recovered);
+        $("#total-cases-country4").append(response[response.length-1].Confirmed);
+        $("#total-deaths-country4").append(response[response.length-1].Deaths);
+        var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
+        var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
+        $("#new-cases-country4").append("+"+new_cases);
+        $("#active-cases-country4").append(active_cases);
+       }
+      else {
+        console.log("PROVINCE PRESENT")
+       }
+      
+      
+    });
+    
   });
+  
+
+  
+  
+  
+  
+
+  
+  
+
+
+  
+
+  
+  
+  
+
+  
+
+  
 
   function countrySearch(e) {
     e.preventDefault();
     var countryName = $("#country-input").val();
-    console.log(countryName)                    //TESTING (TO BE REMOVED)
+    
     
     var countrySearch = {
       "url": "https://api.covid19api.com/live/country/" + countryName + "/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving countrySearch Name data
@@ -114,19 +236,7 @@ $(document).ready(function () {
     };
     
     $.ajax(countrySearch).done(function (response) {
-      var i;
-      var currentDateObj = new Date();
-      var currentDateMinusOneObj = new Date();
-      var totalNewCases = 0;
-      var totalNewCasesMinusOne = 0;
-      var totalCasesMinusOne = 0;
-      var totalDeathsMinusOne = 0;
-      var totalCases = 0;
-      var totalDeaths = 0;
-      currentDateMinusOneObj.setDate(currentDateMinusOneObj.getDate()-2)
-      currentDateObj.setDate(currentDateObj.getDate()-1)
-      currentDateMinusOneObj.setHours(8,0,0,0);
-      currentDateObj.setHours(8,0,0,0);
+      
 
           
 
@@ -204,10 +314,10 @@ $(document).ready(function () {
     
     
     var countrySearchChart = {
-      "url": "https://api.covid19api.com/total/country/"+ countryName + "/status/confirmed?from=" + ISOMinusFourMonthsDate + "&to=" + ISOcurrentDate,     //Retrieving countrySearch Name data
+      "url": "https://api.covid19api.com/total/country/"+ countryName + "/status/confirmed",     //Retrieving countrySearch Name data
       "method": "GET",
       "timeout": 0,
-      //https://api.covid19api.com/total/country/singapore/status/confirmed?from=2021-01-01T00:00:00Z&to=2021-04-01T00:00:00Z
+      //?from=" + ISOMinusFourMonthsDate + "&to=" + ISOcurrentDate
     };  
     
     $.ajax(countrySearchChart).done(function (response) {
@@ -216,8 +326,6 @@ $(document).ready(function () {
     var dataArray = new Array();                                          //countrySearchChart Function (Note: Add in US,UK etc functionality!!!!)
     
       
-
-    //https://api.covid19api.com/live/country/south-africa/status/confirmed/date/2020-03-21T13:13:30Z
 
 
 
@@ -238,7 +346,14 @@ $(document).ready(function () {
       
       stringDate = dt + "/" + month + "/" + year ;
       labelArray.push(stringDate);
-      dataArray.push(response[i].Cases-response[i-1].Cases);    //(Note: Add in US,UK etc functionality!!!!)
+
+      if (response[i].Cases >= response[i-1].Cases ) {
+        dataArray.push(response[i].Cases-response[i-1].Cases);  
+      }
+      else {
+        dataArray.push(response[i-1].Cases-response[i-2].Cases);
+      }
+      
     }
 
     var myChart = new Chart(ctx2, {

@@ -29,7 +29,7 @@
                 <a class="nav-link active navbar-content" href="updates.html"><b>News/Updates</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active navbar-content" href="about.html"><b>Vaccination</b></a>
+                <a class="nav-link active navbar-content" href="vaccination.html"><b>Vaccination</b></a>
               </li>
             </ul>
             <span class="navbar-text">
@@ -57,7 +57,8 @@
             <input type="text" class="country-input-class" id="country-input" placeholder="Enter country name" required><br>
           </form>
           <p class="intro-para">
-            COVID-Tracker allows you to inquire the statistics of any country affected by COVID-19 for greater public awareness of the global situation
+            COVID-Tracker allows you to inquire the statistics of any country affected by COVID-19 for greater public awareness of the global situation. 
+            Statistics such as new cases and recoveries per day will be provided as long as a chart representing a country's previous COVID-19 cases per day.
           </p>
         </div>
         <div class="col-8">
@@ -66,7 +67,6 @@
           </div>
         </div>
       </div>
-      
     </div>
 
     <div id="country-search-div">
@@ -116,7 +116,7 @@
         </div>
         <div class="col-4">
           <div class="country-search-placeholder">
-            DEATHS
+            NEW DEATHS
           </div>
           <div class="death-value" id="country-search-death">
             -
@@ -204,48 +204,51 @@
     
     <div class="container">
       <div class="row">
-        <div class="col country-title">
-          MALAYSIA
+        <div class="col country-title" id="country-random1">
+          
         </div>
-        <div class="col country-title">
-          SINGAPORE
+        <div class="col country-title" id="country-random2">
+          
         </div>
-        <div class="col country-title">
-          INDONESIA
+        <div class="col country-title" id="country-random3"> 
+          
         </div>
-        <div class="col country-title">
-          ISRAEL
+        <div class="col country-title" id="country-random4">
+          
         </div>
       </div>
       <div class="row">
         <div class="col country-content">
-          <img src="https://www.countryflags.io/my/flat/64.png">
+          <div id="country-flag1">
+
+          </div>
+  
           <div class="row">
-            <div class="recovered-cases" id="recovered-cases-malaysia"></div>
+            <div class="recovered-cases" id="recovered-cases-country1"></div>
 
           <div class="secondary-data-title">
             RECOVERED
           </div>
-          <div class="cases-content" id="new-cases-malaysia">
+          <div class="cases-content" id="new-cases-country1">
             
           </div>
           <div class="secondary-data-title">
             NEW CASES
           </div>
-          <div class="cases-content" id="confirmed-cases-malaysia">
+          <div class="cases-content" id="confirmed-cases-country1">
             
           </div>
           <div class="secondary-data-title">
             TOTAL CASES
           </div>
-          <div class="active-cases-content" id="active-cases-malaysia">
+          <div class="active-cases-content" id="active-cases-country1">
             
           </div>
           
           <div class="secondary-data-title">
             ACTIVE CASES
           </div>
-          <div class="death-value" id="total-deaths-malaysia">
+          <div class="death-value" id="total-deaths-country1">
 
           </div>
           
@@ -257,32 +260,35 @@
           </div>
         </div>
         
-        <div class="col country-content" > 
-          <img src="https://www.countryflags.io/sg/flat/64.png">
-          <div class="recovered-cases" id="recovered-cases-singapore"></div>
+        <div class="col country-content" >                      
+          <div id="country-flag2">
+            
+          </div>
+          
+          <div class="recovered-cases" id="recovered-cases-country2"></div>
 
           <div class="secondary-data-title">
             RECOVERED
           </div>
-          <div class="cases-content" id="new-cases-singapore">
+          <div class="cases-content" id="new-cases-country2">
             
           </div>
           <div class="secondary-data-title">
             NEW CASES
           </div>
-          <div class="cases-content" id="total-cases-singapore">
+          <div class="cases-content" id="total-cases-country2">
 
           </div>
           <div class="secondary-data-title">
             TOTAL CASES
           </div>
-          <div class="active-cases-content" id="active-cases-singapore">
+          <div class="active-cases-content" id="active-cases-country2">
 
           </div>
           <div class="secondary-data-title">
             ACTIVE CASES
           </div>
-          <div class="death-value" id="total-deaths-singapore">
+          <div class="death-value" id="total-deaths-country2">
 
           </div>
           <div class="secondary-data-title">
@@ -293,31 +299,33 @@
         </div>
         
         <div class="col country-content">
-          <img src="https://www.countryflags.io/id/flat/64.png">
-          <div class="recovered-cases" id="recovered-cases-indonesia"></div>
+          <div id="country-flag3">
+            
+          </div>
+          <div class="recovered-cases" id="recovered-cases-country3"></div>
 
           <div class="secondary-data-title">
             RECOVERED
           </div>
-          <div class="cases-content" id="new-cases-indonesia">
+          <div class="cases-content" id="new-cases-country3">
             
           </div>
           <div class="secondary-data-title">
             NEW CASES
           </div>
-          <div class="cases-content" id="total-cases-indonesia">
+          <div class="cases-content" id="total-cases-country3">
 
           </div>
           <div class="secondary-data-title">
             TOTAL CASES
           </div>
-          <div class="active-cases-content" id="active-cases-indonesia">
+          <div class="active-cases-content" id="active-cases-country3">
 
           </div>
           <div class="secondary-data-title">
             ACTIVE CASES
           </div>
-          <div class="death-value" id="total-deaths-indonesia">
+          <div class="death-value" id="total-deaths-country3">
 
           </div>
           <div class="secondary-data-title">
@@ -327,31 +335,34 @@
 
         </div>
         <div class="col country-content">
-          <img src="https://www.countryflags.io/il/flat/64.png">
-          <div class="recovered-cases" id="recovered-cases-israel"></div>
+          <div id="country-flag4">
+            
+          </div>
+         
+          <div class="recovered-cases" id="recovered-cases-country4"></div>
 
           <div class="secondary-data-title">
             RECOVERED
           </div>
-          <div class="cases-content" id="new-cases-israel">
+          <div class="cases-content" id="new-cases-country4">
             
           </div>
           <div class="secondary-data-title">
             NEW CASES
           </div>
-          <div class="cases-content" id="total-cases-israel">
+          <div class="cases-content" id="total-cases-country4">
 
           </div>
           <div class="secondary-data-title">
             TOTAL CASES
           </div>
-          <div class="active-cases-content" id="active-cases-israel">
+          <div class="active-cases-content" id="active-cases-country4">
 
           </div>
           <div class="secondary-data-title">
             ACTIVE CASES
           </div>
-          <div class="death-value" id="total-deaths-israel">
+          <div class="death-value" id="total-deaths-country4">
 
           </div>
           <div class="secondary-data-title">
