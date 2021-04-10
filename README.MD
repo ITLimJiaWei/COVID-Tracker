@@ -54,6 +54,8 @@ Date        | Description                                               | Status
 
 <h3>Possible Problems</h3>
 
+* Postman COVID19 API may be unreponsive at times due to the user refreshing the page multiple times. Though this scenario is unlikely, it should be noted.
+
 
 <h2>Credits<h2>
 
