@@ -6,7 +6,7 @@ $(document).ready(function () {
 
   //Used for 4 main country statistics  (Idea to randomize the statistics)
   var currentDateTime = new Date();
-  currentDateTime.setDate(currentDateTime.getDate()-3)
+  currentDateTime.setDate(currentDateTime.getDate()-4)
   var currentDateTimeMinusOneISO = currentDateTime.toISOString();
   var countryArray = new Array();    
   var country2 = "";
@@ -24,10 +24,14 @@ $(document).ready(function () {
   var totalDeathsMinusOne = 0;
   var totalCases = 0;
   var totalDeaths = 0;
+  var totalRecoveries = 0;
+  var totalRecoveriesMinusOne = 0;
   currentDateMinusOneObj.setDate(currentDateMinusOneObj.getDate()-2)
-  currentDateObj.setDate(currentDateObj.getDate()-1)
   currentDateMinusOneObj.setHours(8,0,0,0);
+  currentDateObj.setDate(currentDateObj.getDate()-1)
   currentDateObj.setHours(8,0,0,0);
+  
+  
 
   //Used for CountrySearch Chart
   var MinusFourMonthsDate = new Date();
@@ -95,18 +99,68 @@ $(document).ready(function () {
     };
 
     $.ajax(countryRandom1).done(function (response) {
-      console.log(response[0].Province);
-      if (response[0].Province === "") {
+
+      if (typeof response[0] === 'undefined' ) {
+        $("#recovered-cases-country1").append('-');
+        $("#total-cases-country1").append('-');
+        $("#new-cases-country1").append('-');
+        $("#total-deaths-country1").append('-');
+        $("#active-cases-country1").append('-');
+      
+      } else if (response[0].Province === "") {
         $("#recovered-cases-country1").append(response[response.length-1].Recovered);
         $("#total-deaths-country1").append(response[response.length-1].Deaths);
         var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
         var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed;     
-        $("#confirmed-cases-country1").append(response[response.length-1].Confirmed)
+        $("#total-cases-country1").append(response[response.length-1].Confirmed)
         $("#active-cases-country1").append(active_cases);
         $("#new-cases-country1").append("+"+new_cases);
-      }
-      else {
-        console.log("PROVINCE PRESENT");
+      }  else {
+
+        console.log("PROVINCE PRESENT 1")
+        for (i = 0 ; i <response.length; i++) {
+        
+          ISOdate = new Date(response[i].Date);
+          year = ISOdate.getFullYear();
+          month = ISOdate.getMonth()+1;
+          dt = ISOdate.getDate();  
+          dtMinusOne = ISOdate.getDate()-1; 
+          if (dt < 10) {
+            dt = '0' +  dt;
+          }
+    
+          if (dtMinusOne < 10) {
+            dtMinusOne = '0' +  dtMinusOne;
+          }
+          if (month < 10) {
+            month = '0' + month;
+          }
+    
+          countrySearchDate = year+'-'+month+'-'+dt;
+          countrySearchDateMinusOne = year+'-'+month+'-'+dtMinusOne;
+          var countrySearchDateObj = new Date(countrySearchDate);
+          if (countrySearchDateObj.toString()===currentDateObj.toString() ) {
+            totalCases += response[i].Confirmed;
+            totalDeaths += response[i].Deaths;
+            totalRecoveries += response[i].Recovered;
+          } 
+          if (countrySearchDateObj.toString()===currentDateMinusOneObj.toString()) {
+            totalCasesMinusOne += response[i].Confirmed; 
+            totalDeathsMinusOne += response[i].Deaths;
+            totalRecoveriesMinusOne += response[i].Recovered;
+          }
+          
+        }
+  
+        var newRecovered = totalRecoveries - totalRecoveriesMinusOne;
+        var newCases = totalCases - totalCasesMinusOne;
+        var newDeaths = totalDeaths - totalDeathsMinusOne;   
+        $("#recovered-cases-country1").append(newRecovered);
+        $("#total-cases-country1").append(totalCases);
+        var activeCases = totalCases - totalRecoveries
+        $("#new-cases-country1").append("+"+newCases);
+        $("#total-deaths-country1").append(totalDeaths);
+        $("#active-cases-country1").append(activeCases);
       }
 
       
@@ -121,8 +175,14 @@ $(document).ready(function () {
     
     $.ajax(countryRandom2).done(function (response) {
 
-      if (!response[0].Province) {
+      if (typeof response[0] === 'undefined' ) {
+        $("#recovered-cases-country2").append('-');
+        $("#total-cases-country2").append('-');
+        $("#new-cases-country2").append('-');
+        $("#total-deaths-country2").append('-');
+        $("#active-cases-country2").append('-');
 
+      } else if (response[0].Province === "") {
         $("#recovered-cases-country2").append(response[response.length-1].Recovered);
         $("#total-cases-country2").append(response[response.length-1].Confirmed);
         var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
@@ -130,29 +190,55 @@ $(document).ready(function () {
         $("#new-cases-country2").append("+"+new_cases);
         $("#total-deaths-country2").append(response[response.length-1].Deaths);
         $("#active-cases-country2").append(active_cases);
-      }
+      } else {
 
-      else {
-        console.log("PROVINCE PRESENT")
-        // var provinceCountries = {
-        //   "url": "https://api.covid19api.com/total/country/us/status/confirmed",
-        //   "method": "GET",
-        //   "timeout": 0,
-        // };
+      
+        console.log("PROVINCE PRESENT 2")
+        for (i = 0 ; i <response.length; i++) {
         
-        // $.ajax(provinceCountries).done(function (response) {
-        
-        //   $("#recovered-cases-country2").append(response[response.length-1].Recovered);
-        //   $("#total-cases-country2").append(response[response.length-1].Confirmed);
-        //   var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
-        //   var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
-        //   $("#new-cases-country2").append("+"+new_cases);
-        //   $("#total-deaths-country2").append(response[response.length-1].Deaths);
-        //   $("#active-cases-country2").append(active_cases);
+          ISOdate = new Date(response[i].Date);
+          year = ISOdate.getFullYear();
+          month = ISOdate.getMonth()+1;
+          dt = ISOdate.getDate();  
+          dtMinusOne = ISOdate.getDate()-1; 
+          if (dt < 10) {
+            dt = '0' +  dt;
+          }
+    
+          if (dtMinusOne < 10) {
+            dtMinusOne = '0' +  dtMinusOne;
+          }
+          if (month < 10) {
+            month = '0' + month;
+          }
+    
+          countrySearchDate = year+'-'+month+'-'+dt;
+          countrySearchDateMinusOne = year+'-'+month+'-'+dtMinusOne;
+          var countrySearchDateObj = new Date(countrySearchDate);
+          if (countrySearchDateObj.toString()===currentDateObj.toString() ) {
+            totalCases += response[i].Confirmed;
+            totalDeaths += response[i].Deaths;
+            totalRecoveries += response[i].Recovered
+          } 
+          if (countrySearchDateObj.toString()===currentDateMinusOneObj.toString()) {
+            totalCasesMinusOne += response[i].Confirmed; 
+            totalDeathsMinusOne += response[i].Deaths;
+            totalRecoveriesMinusOne += response[i].Recovered
+          }
+          
+        }
+  
+        var newRecovered = totalRecoveries - totalRecoveriesMinusOne;
+        var newCases = totalCases - totalCasesMinusOne;
+        var newDeaths = totalDeaths - totalDeathsMinusOne;   
+        $("#recovered-cases-country2").append(newRecovered);
+        $("#total-cases-country2").append(totalCases);
+        var activeCases = totalCases - totalRecoveries
+        $("#new-cases-country2").append("+"+newCases);
+        $("#total-deaths-country2").append(totalDeaths);
+        $("#active-cases-country2").append(activeCases);
 
 
-        // });    
-        
       }
     });
 
@@ -164,17 +250,66 @@ $(document).ready(function () {
     
     $.ajax(countryRandom3).done(function (response) {
 
-      if (!response[0].Province) {
+      if (typeof response[0] === 'undefined' ) { 
+        $("#recovered-cases-country3").append('-');
+        $("#total-cases-country3").append('-');
+        $("#new-cases-country3").append('-');
+        $("#total-deaths-country3").append('-');
+        $("#active-cases-country3").append('-');
+
+      } else if (response[0].Province === "") {
         $("#recovered-cases-country3").append(response[response.length-1].Recovered);
         $("#total-cases-country3").append(response[response.length-1].Confirmed);
         $("#total-deaths-country3").append(response[response.length-1].Deaths);
-        var active_cases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
-        var new_cases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
-        $("#new-cases-country3").append("+"+new_cases);
-        $("#active-cases-country3").append(active_cases);
-      }
-      else {
-        console.log("PROVINCE PRESENT")
+        var newCases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
+        var activeCases = response[response.length-1].Confirmed-response[response.length-1].Recovered;
+        $("#new-cases-country3").append("+"+newCases);
+        $("#active-cases-country3").append(activeCases);
+      }  else {
+        console.log("PROVINCE PRESENT 3")
+        for (i = 0 ; i <response.length; i++) {
+        
+          ISOdate = new Date(response[i].Date);
+          year = ISOdate.getFullYear();
+          month = ISOdate.getMonth()+1;
+          dt = ISOdate.getDate();  
+          dtMinusOne = ISOdate.getDate()-1; 
+          if (dt < 10) {
+            dt = '0' +  dt;
+          }
+    
+          if (dtMinusOne < 10) {
+            dtMinusOne = '0' +  dtMinusOne;
+          }
+          if (month < 10) {
+            month = '0' + month;
+          }
+    
+          countrySearchDate = year+'-'+month+'-'+dt;
+          countrySearchDateMinusOne = year+'-'+month+'-'+dtMinusOne;
+          var countrySearchDateObj = new Date(countrySearchDate);
+          if (countrySearchDateObj.toString()===currentDateObj.toString() ) {
+            totalCases += response[i].Confirmed;
+            totalDeaths += response[i].Deaths;
+            totalRecoveries += response[i].Recovered
+          } 
+          if (countrySearchDateObj.toString()===currentDateMinusOneObj.toString()) {
+            totalCasesMinusOne += response[i].Confirmed; 
+            totalDeathsMinusOne += response[i].Deaths;
+            totalRecoveriesMinusOne += response[i].Recovered
+          }
+          
+        }
+  
+        var newRecovered = totalRecoveries - totalRecoveriesMinusOne;
+        var newCases = totalCases - totalCasesMinusOne;
+        var newDeaths = totalDeaths - totalDeathsMinusOne;   
+        $("#recovered-cases-country3").append(newRecovered);
+        $("#total-cases-country3").append(totalCases);
+        var activeCases = totalCases - totalRecoveries
+        $("#new-cases-country3").append("+"+newCases);
+        $("#total-deaths-country3").append(totalDeaths);
+        $("#active-cases-country3").append(activeCases);
       }
     });
 
@@ -185,8 +320,15 @@ $(document).ready(function () {
     };
     
     $.ajax(countryRandom4).done(function (response) {
+    
+      if (typeof response[0] === 'undefined' ) { 
+        $("#recovered-cases-country4").append('-');
+        $("#total-cases-country4").append('-');
+        $("#new-cases-country4").append('-');
+        $("#total-deaths-country4").append('-');
+        $("#active-cases-country4").append('-');
 
-      if (response[0].Province === "") {
+      } else if (response[0].Province === "") {
         $("#recovered-cases-country4").append(response[response.length-1].Recovered);
         $("#total-cases-country4").append(response[response.length-1].Confirmed);
         $("#total-deaths-country4").append(response[response.length-1].Deaths);
@@ -196,7 +338,50 @@ $(document).ready(function () {
         $("#active-cases-country4").append(active_cases);
        }
       else {
-        console.log("PROVINCE PRESENT")
+        console.log("PROVINCE PRESENT 4")
+        for (i = 0 ; i <response.length; i++) {
+        
+          ISOdate = new Date(response[i].Date);
+          year = ISOdate.getFullYear();
+          month = ISOdate.getMonth()+1;
+          dt = ISOdate.getDate();  
+          dtMinusOne = ISOdate.getDate()-1; 
+          if (dt < 10) {
+            dt = '0' +  dt;
+          }
+    
+          if (dtMinusOne < 10) {
+            dtMinusOne = '0' +  dtMinusOne;
+          }
+          if (month < 10) {
+            month = '0' + month;
+          }
+    
+          countrySearchDate = year+'-'+month+'-'+dt;
+          countrySearchDateMinusOne = year+'-'+month+'-'+dtMinusOne;
+          var countrySearchDateObj = new Date(countrySearchDate);
+          if (countrySearchDateObj.toString()===currentDateObj.toString() ) {
+            totalCases += response[i].Confirmed;
+            totalDeaths += response[i].Deaths;
+            totalRecoveries += response[i].Recovered
+          } 
+          if (countrySearchDateObj.toString()===currentDateMinusOneObj.toString()) {
+            totalCasesMinusOne += response[i].Confirmed; 
+            totalDeathsMinusOne += response[i].Deaths;
+            totalRecoveriesMinusOne += response[i].Recovered
+          }
+          
+        }
+  
+        var newRecovered = totalRecoveries - totalRecoveriesMinusOne;
+        var newCases = totalCases - totalCasesMinusOne;
+        var newDeaths = totalDeaths - totalDeathsMinusOne;   
+        $("#recovered-cases-country4").append(newRecovered);
+        $("#total-cases-country4").append(totalCases);
+        var activeCases = totalCases - totalRecoveries
+        $("#new-cases-country4").append("+"+newCases);
+        $("#total-deaths-country4").append(totalDeaths);
+        $("#active-cases-country4").append(activeCases);
        }
       
       
@@ -208,22 +393,6 @@ $(document).ready(function () {
   
   
   
-  
-
-  
-  
-
-
-  
-
-  
-  
-  
-
-  
-
-  
-
   function countrySearch(e) {
     e.preventDefault();
     var countryName = $("#country-input").val();
@@ -236,70 +405,87 @@ $(document).ready(function () {
     };
     
     $.ajax(countrySearch).done(function (response) {
+
+      if (response[0].Province === "") { 
+        $("#country-search-name").empty();                                                      
+        $("#country-search-name").append(response[response.length-1].Country.toUpperCase())     
+        $("#country-search-flag").empty();
+        $("#country-search-flag").append("<img src='https://www.countryflags.io/"+ response[0].CountryCode.toLowerCase()  + "/flat/64.png'>");
+        var newCases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
+        var newDeaths = response[response.length-1].Deaths - response[response.length-2].Deaths; 
+        $("#country-search-new-cases").empty();  
+        $("#country-search-new-cases").append("+" + newCases);   
+        $("#country-search-cases").empty();
+        $("#country-search-cases").append(response[response.length-1].Confirmed)
+        $("#country-search-total-deaths").empty();
+        $("#country-search-total-deaths").append(response[response.length-1].Deaths);
+        $("#country-search-death").empty();
+        $("#country-search-death").append(newDeaths);
+        $("#country-search-fatality-rate").empty();
+        $("#country-search-fatality-rate").append((response[response.length-1].Deaths/response[response.length-1].Confirmed).toFixed(4) + "%");
+        
+        
+      } else {
+        for (i = 0 ; i <response.length; i++) {
+        
+          ISOdate = new Date(response[i].Date);
+          year = ISOdate.getFullYear();
+          month = ISOdate.getMonth()+1;
+          dt = ISOdate.getDate();  
+          dtMinusOne = ISOdate.getDate()-1; 
+          if (dt < 10) {
+            dt = '0' +  dt;
+          }
+    
+          if (dtMinusOne < 10) {
+            dtMinusOne = '0' +  dtMinusOne;
+          }
+          if (month < 10) {
+            month = '0' + month;
+          }
+    
+          countrySearchDate = year+'-'+month+'-'+dt;
+          countrySearchDateMinusOne = year+'-'+month+'-'+dtMinusOne;
+          var countrySearchDateObj = new Date(countrySearchDate);
+          if (countrySearchDateObj.toString()===currentDateObj.toString() ) {
+            totalCases += response[i].Confirmed;
+            totalDeaths += response[i].Deaths;
+          } 
+          console.log(currentDateMinusOneObj);
+          console.log(countrySearchDateObj);
+          if (countrySearchDateObj.toString()===currentDateMinusOneObj.toString()) {
+            totalCasesMinusOne += response[i].Confirmed; 
+            totalDeathsMinusOne += response[i].Deaths;
+          }
+        }
+
+
+        var newCases = totalCases - totalCasesMinusOne;
+        var newDeaths = totalDeaths - totalDeathsMinusOne;
       
 
-          
-
-      for (i = 0 ; i <response.length; i++) {
-        
-        ISOdate = new Date(response[i].Date);
-        year = ISOdate.getFullYear();
-        month = ISOdate.getMonth()+1;
-        dt = ISOdate.getDate();  
-        dtMinusOne = ISOdate.getDate()-1; 
-        if (dt < 10) {
-          dt = '0' +  dt;
-        }
-  
-        if (dtMinusOne < 10) {
-          dtMinusOne = '0' +  dtMinusOne;
-        }
-        if (month < 10) {
-          month = '0' + month;
-        }
-  
-        countrySearchDate = year+'-'+month+'-'+dt;
-        countrySearchDateMinusOne = year+'-'+month+'-'+dtMinusOne;
-        var countrySearchDateObj = new Date(countrySearchDate);
-        if (countrySearchDateObj.toString()===currentDateObj.toString() ) {
-          totalCases += response[i].Confirmed;
-          console.log(totalCases);
-          totalDeaths += response[i].Deaths;
-        } 
-        else {
-
-        }
-        
-        if (countrySearchDateObj.toString()===currentDateMinusOneObj.toString()) {
-          totalCasesMinusOne += response[i].Confirmed; 
-          
-          totalDeathsMinusOne += response[i].Deaths;
-        }
-        else {
-          
-        }
-        
+        $("#country-search-name").empty();                                                      
+        $("#country-search-name").append(response[response.length-1].Country.toUpperCase())     
+        $("#country-search-flag").empty();
+        $("#country-search-flag").append("<img src='https://www.countryflags.io/"+ response[0].CountryCode.toLowerCase()  + "/flat/64.png'>")
+        $("#country-search-new-cases").empty();
+        $("#country-search-new-cases").append("+"+newCases);
+        $("#country-search-cases").empty();
+        $("#country-search-cases").append(totalCases);
+        $("#country-search-fatality-rate").empty();
+        $("#country-search-fatality-rate").append((totalDeaths/totalCases).toFixed(4) + "%");
+        $("#country-search-death").empty();
+        $("#country-search-death").append(newDeaths);
+        $("#country-search-total-deaths").empty();
+        $("#country-search-total-deaths").append(totalDeaths);
       }
 
+          
 
-      var newCases = totalCases - totalCasesMinusOne;
-      var newDeaths = totalDeaths - totalDeathsMinusOne;
+     
+
+
       
-
-      $("#country-search-name").empty();                                                      //Note (Add loading animation)
-      $("#country-search-name").append(response[response.length-1].Country.toUpperCase())     
-      $("#country-search-flag").empty();
-      $("#country-search-flag").append("<img src='https://www.countryflags.io/"+ response[0].CountryCode.toLowerCase()  + "/flat/64.png'>")
-      $("#country-search-new-cases").empty();
-      $("#country-search-new-cases").append("+"+newCases);
-      $("#country-search-cases").empty();
-      $("#country-search-cases").append(totalCases);
-      $("#country-search-fatality-rate").empty();
-      $("#country-search-fatality-rate").append((totalDeaths/totalCases).toFixed(4) + "%");
-      $("#country-search-death").empty();
-      $("#country-search-death").append(newDeaths);
-      $("#country-search-total-deaths").empty();
-      $("#country-search-total-deaths").append(totalDeaths);
       
     });
     // 2021-04-07T00:00:00Z

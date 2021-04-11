@@ -56,6 +56,10 @@ html {
     font-family: 'Roboto', sans-serif;
 }
 
+#country-search-div {
+    padding-top:2%;
+}
+
 .data-title {
     color:rgb(211, 211, 211);
     font-size:200%;
@@ -70,6 +74,7 @@ html {
     text-align:center;
     margin:auto;
 }
+
 
 .cases-value {
     font-size:200%;
