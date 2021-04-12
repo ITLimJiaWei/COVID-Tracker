@@ -312,9 +312,8 @@ $(document).ready(function () {
         $("#active-cases-country3").append(activeCases);
       }
     });
-
     var countryRandom4 = {
-      "url": "https://api.covid19api.com/live/country/"+ countryArray[3] +"/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving Israel Data
+      "url": "https://api.covid19api.com/live/country/"+ "NL" +"/status/confirmed/date/" + currentDateTimeMinusOneISO,           //Retrieving Israel Data
       "method": "GET",
       "timeout": 0,
     };
@@ -356,7 +355,6 @@ $(document).ready(function () {
           if (month < 10) {
             month = '0' + month;
           }
-    
           countrySearchDate = year+'-'+month+'-'+dt;
           countrySearchDateMinusOne = year+'-'+month+'-'+dtMinusOne;
           var countrySearchDateObj = new Date(countrySearchDate);
@@ -364,19 +362,19 @@ $(document).ready(function () {
             totalCases += response[i].Confirmed;
             totalDeaths += response[i].Deaths;
             totalRecoveries += response[i].Recovered
+            console.log(totalRecoveries);
           } 
           if (countrySearchDateObj.toString()===currentDateMinusOneObj.toString()) {
             totalCasesMinusOne += response[i].Confirmed; 
             totalDeathsMinusOne += response[i].Deaths;
-            totalRecoveriesMinusOne += response[i].Recovered
+            
           }
           
         }
-  
-        var newRecovered = totalRecoveries - totalRecoveriesMinusOne;
+        
         var newCases = totalCases - totalCasesMinusOne;
         var newDeaths = totalDeaths - totalDeathsMinusOne;   
-        $("#recovered-cases-country4").append(newRecovered);
+        $("#recovered-cases-country4").append(totalRecoveries);
         $("#total-cases-country4").append(totalCases);
         var activeCases = totalCases - totalRecoveries
         $("#new-cases-country4").append("+"+newCases);
@@ -422,8 +420,29 @@ $(document).ready(function () {
         $("#country-search-death").empty();
         $("#country-search-death").append(newDeaths);
         $("#country-search-fatality-rate").empty();
-        $("#country-search-fatality-rate").append((response[response.length-1].Deaths/response[response.length-1].Confirmed).toFixed(4) + "%");
+
+        var fatalityRate= (response[response.length-1].Deaths/response[response.length-1].Confirmed).toFixed(4)
+        $("#country-search-fatality-rate").append(fatalityRate + "%");
         
+        $("#country-search-desc-name").empty();
+        $("#country-search-desc-name").append(response[0].Country);
+
+        $("#country-search-desc-status").empty();
+        $("#country-search-desc-rates").empty();
+        if (newCases <=500 && fatalityRate <=1 ) {
+          $("#country-search-desc-status").append("well");
+          $("#country-search-desc-rates").append("low");
+
+        } else if (newCases <= 3000 && fatalityRate <= 5) {
+
+          $("#country-search-desc-status").append("relatively well");
+          $("#country-search-desc-rates").append("moderate");
+
+        } else {
+          console.log("TEST2");
+          $("#country-search-desc-status").append("relatively poorly");
+          $("#country-search-desc-rates").append("high");
+        }
         
       } else {
         for (i = 0 ; i <response.length; i++) {
@@ -473,11 +492,32 @@ $(document).ready(function () {
         $("#country-search-cases").empty();
         $("#country-search-cases").append(totalCases);
         $("#country-search-fatality-rate").empty();
-        $("#country-search-fatality-rate").append((totalDeaths/totalCases).toFixed(4) + "%");
+
+        var fatalityRate= (response[response.length-1].Deaths/response[response.length-1].Confirmed).toFixed(4)
+        $("#country-search-fatality-rate").append(fatalityRate + "%");
         $("#country-search-death").empty();
         $("#country-search-death").append(newDeaths);
         $("#country-search-total-deaths").empty();
         $("#country-search-total-deaths").append(totalDeaths);
+
+        $("#country-search-desc-name").empty();
+        $("#country-search-desc-name").append(response[0].Country);
+
+        $("#country-search-desc-rates").empty();
+        if (newCases <=500 && fatalityRate <=1 ) {
+          $("#country-search-desc-status").append("well");
+          $("#country-search-desc-rates").append("low");
+
+        } else if (newCases <= 3000 && fatalityRate <= 5) {
+
+          $("#country-search-desc-status").append("relatively well");
+          $("#country-search-desc-rates").append("moderate");
+
+        } else {
+          console.log("TEST2");
+          $("#country-search-desc-status").append("relatively poorly");
+          $("#country-search-desc-rates").append("high");
+        }
       }
 
           
@@ -654,6 +694,42 @@ $(document).ready(function () {
 
   //Continue coding here
 
+  var SG = {
+    "url": "https://api.covid19api.com/live/country/sg/status/confirmed",
+    "method": "GET",
+    "timeout": 0,
+  };
+  
+  $.ajax(SG).done(function (response) {
+                                                      
+  
+    var newCases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
+    var newDeaths = response[response.length-1].Deaths - response[response.length-2].Deaths; 
+    var fatalityRate = (response[response.length-1].Deaths/response[response.length-1].Confirmed).toFixed(4)
+    $("#country-search-new-cases").empty();  
+    $("#country-search-new-cases").append("+" + newCases);   
+    $("#country-search-cases").empty();
+    $("#country-search-cases").append(response[response.length-1].Confirmed)
+    $("#country-search-total-deaths").empty();
+    $("#country-search-total-deaths").append(response[response.length-1].Deaths);
+    $("#country-search-death").empty();
+    $("#country-search-death").append(newDeaths);
+    $("#country-search-fatality-rate").empty();
+    $("#country-search-fatality-rate").append(fatalityRate + "%");
+
+    $("#country-search-desc-name").empty();
+    $("#country-search-desc-name").append(response[0].Country);
+    $("#country-search-desc-rates").empty();
+    if (newCases <=100 && fatalityRate <=1 ) {
+      $("#country-search-desc-rates").append("low");
+    
+    } else if (newCases <=1000 && fatalityRate <= 5) { 
+      $("#country-search-desc-rates").append("moderate");
+    
+    }
+
+
+  });
 
 
 
