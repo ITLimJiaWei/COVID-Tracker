@@ -49,11 +49,23 @@ html {
     padding:2%;
 }
 
-.country-search-desc {
+.country-search-desc-title {
     color:rgb(0, 204, 204);
     text-align:center;
+    font-size:120%;
+}
+
+.country-search-desc {
+    color:rgb(0, 204, 204);
+    text-align:left;
     padding-bottom:2%;
+    font-size:100%;
     font-family: 'Roboto', sans-serif;
+}
+
+.country-search-info {
+    color:rgb(0, 204, 204);
+    font-weight: 700;
 }
 
 #country-search-div {
@@ -148,6 +160,10 @@ html {
 
 #country-search-flag {
     text-align:center
+}
+
+.inline-class {
+    display:inline;
 }
 
 
