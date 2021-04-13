@@ -362,7 +362,6 @@ $(document).ready(function () {
             totalCases += response[i].Confirmed;
             totalDeaths += response[i].Deaths;
             totalRecoveries += response[i].Recovered
-            console.log(totalRecoveries);
           } 
           if (countrySearchDateObj.toString()===currentDateMinusOneObj.toString()) {
             totalCasesMinusOne += response[i].Confirmed; 
@@ -420,7 +419,7 @@ $(document).ready(function () {
         $("#country-search-death").empty();
         $("#country-search-death").append(newDeaths);
         $("#country-search-fatality-rate").empty();
-
+        var avgCases = ((newCases + response[response.length-2].Confirmed-response[response.length-3].Confirmed)/2).toFixed(1)
         var fatalityRate= (response[response.length-1].Deaths/response[response.length-1].Confirmed).toFixed(4)
         $("#country-search-fatality-rate").append(fatalityRate + "%");
         
@@ -429,8 +428,11 @@ $(document).ready(function () {
 
         $("#country-search-desc-status").empty();
         $("#country-search-desc-rates").empty();
+
+        $("#country-search-desc-status2").append(avgCases);
         if (newCases <=500 && fatalityRate <=1 ) {
           $("#country-search-desc-status").append("well");
+          console.log("TEST2");
           $("#country-search-desc-rates").append("low");
 
         } else if (newCases <= 3000 && fatalityRate <= 5) {
@@ -439,7 +441,7 @@ $(document).ready(function () {
           $("#country-search-desc-rates").append("moderate");
 
         } else {
-          console.log("TEST2");
+          
           $("#country-search-desc-status").append("relatively poorly");
           $("#country-search-desc-rates").append("high");
         }
@@ -492,7 +494,7 @@ $(document).ready(function () {
         $("#country-search-cases").empty();
         $("#country-search-cases").append(totalCases);
         $("#country-search-fatality-rate").empty();
-
+        
         var fatalityRate= (response[response.length-1].Deaths/response[response.length-1].Confirmed).toFixed(4)
         $("#country-search-fatality-rate").append(fatalityRate + "%");
         $("#country-search-death").empty();
@@ -706,6 +708,7 @@ $(document).ready(function () {
     var newCases = response[response.length-1].Confirmed-response[response.length-2].Confirmed; 
     var newDeaths = response[response.length-1].Deaths - response[response.length-2].Deaths; 
     var fatalityRate = (response[response.length-1].Deaths/response[response.length-1].Confirmed).toFixed(4)
+    var avgCases = ((newCases + response[response.length-2].Confirmed-response[response.length-3].Confirmed)/2).toFixed(1)
     $("#country-search-new-cases").empty();  
     $("#country-search-new-cases").append("+" + newCases);   
     $("#country-search-cases").empty();
@@ -720,15 +723,39 @@ $(document).ready(function () {
     $("#country-search-desc-name").empty();
     $("#country-search-desc-name").append(response[0].Country);
     $("#country-search-desc-rates").empty();
-    if (newCases <=100 && fatalityRate <=1 ) {
+    $("#country-search-desc-status").empty();
+    $("#country-search-desc-rates").empty();
+    $("#country-search-desc-status2").empty();
+    $("#country-search-desc-status2").append(avgCases);
+    if (newCases <=500 && fatalityRate <=1 ) {
+
+      $("#country-search-desc-status").append("well");
       $("#country-search-desc-rates").append("low");
-    
-    } else if (newCases <=1000 && fatalityRate <= 5) { 
+    } else if (newCases <= 3000 && fatalityRate <= 5) {
+      $("#country-search-desc-status").append("relatively well");
       $("#country-search-desc-rates").append("moderate");
-    
+    } else {
+      $("#country-search-desc-status").append("relatively poorly");
+      $("#country-search-desc-rates").append("high");
     }
 
 
+  });
+
+  // News API
+
+  var news = {
+    "url": "https://newsapi.org/v2/everything?q=covid&from=2021-04-12&to=2021-04-12&sortBy=popularity&apiKey=03c5e50f7c9b4726b64b4097bf136503",
+    "method": "GET",
+    "timeout": 0,
+    "headers": {
+      "Cookie": "__cfduid=d0fb85e5f2f7745ffdc3f387aea37f9931618291827"
+    },
+  };
+  
+  $.ajax(news).done(function (response) {
+    console.log(response);
+    $("#news-img1").attr("src", response[0].urlToImage); 
   });
 
 
