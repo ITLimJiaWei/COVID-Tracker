@@ -13,6 +13,9 @@ Date        | Description                                               | Status
 ----------- | --------------------------------------------------------- | ------
 4/4/2021    | Selection of APIs and Tools                               |  Done 
 6/4/2021    | Tested searchCountry function                             |  Done 
+10/4/2021   | Completed searchCountry function                          |  Done 
+18/4/2021   | Simplified feature set                                    |  Done 
+20/4/2021   | Randomized countries feature mostly ready                 |  Done 
  
  
 
@@ -20,17 +23,17 @@ Date        | Description                                               | Status
 
 <h2>Design Process</h2>
 
+* COVID-Tracker was designed to be a simple and easy to use website to allow anyone to find out how well a particular country is handling the COVID-19 Pandemic. 
+
 
 <h2>Features</h2>
 
 * CountrySearch - COVID-Tracker allows users to search for specific countries and inquire on their COVID-19 statistics such as new cases and death rates.
-
+* AlternatingInfo - The COVID-19 Statistics of 4 randomized countries will be shown at the bottom of the page.
 
 <h3>Future Features</h3>
 
-
-<h2>Testing</h2>
-
+* COVID-Tracker will eventually include COVID-19 vaccination data as more and more countries roll out their respective vaccination programmes.
 
 <h3>Online Validators Used</h3>
 
@@ -55,6 +58,8 @@ Date        | Description                                               | Status
 <h3>Possible Problems</h3>
 
 * Postman COVID19 API may be unreponsive at times due to the user refreshing the page multiple times. Though this scenario is unlikely, it should be noted.
+
+* At times numbers provided by the Postman COVID19 API may be inaccurate. Countries with states in them and the Uk mostly have this issue. Unfortunately, I am not able to do much about that.
 
 
 <h2>Credits<h2>
@@ -84,7 +89,6 @@ Date        | Description                                               | Status
 * Country Flag - https://www.countryflags.io/
 
 
-<h2>Acknowledgements</h2>
 
 
 
