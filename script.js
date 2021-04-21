@@ -729,13 +729,19 @@ $(document).ready(function () {
     $("#country-search-desc-status2").append(avgCases);
     if (newCases <=500 && fatalityRate <=1 ) {
 
+      $("#country-search-desc-status").empty();
       $("#country-search-desc-status").append("well");
+      $("#country-search-desc-rates").empty();
       $("#country-search-desc-rates").append("low");
     } else if (newCases <= 3000 && fatalityRate <= 5) {
+      $("#country-search-desc-status").empty();
       $("#country-search-desc-status").append("relatively well");
+      $("#country-search-desc-rates").empty();
       $("#country-search-desc-rates").append("moderate");
     } else {
+      $("#country-search-desc-status").empty();
       $("#country-search-desc-status").append("relatively poorly");
+      $("#country-search-desc-rates").empty();
       $("#country-search-desc-rates").append("high");
     }
 
