@@ -744,19 +744,31 @@ $(document).ready(function () {
 
   // News API
 
-  var news = {
-    "url": "https://newsapi.org/v2/everything?q=covid&from=2021-04-12&to=2021-04-12&sortBy=popularity&apiKey=03c5e50f7c9b4726b64b4097bf136503",
+  const news = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/news/get-coronavirus-news/0",
     "method": "GET",
-    "timeout": 0,
     "headers": {
-      "Cookie": "__cfduid=d0fb85e5f2f7745ffdc3f387aea37f9931618291827"
-    },
+      "x-rapidapi-key": "e7b3a68d81msh20f591669580b4ap18f41djsn81f90ab5377f",
+      "x-rapidapi-host": "vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com"
+    }
   };
   
   $.ajax(news).done(function (response) {
     console.log(response);
-    $("#news-img1").attr("src", response[0].urlToImage); 
+    console.log(response.news[0].content);
+    
+    console.log(response.news[0].imageFileName);
+    $("#news-img1").attr("src",response.news[0].imageFileName);
+    $("#news-content1-title").empty();
+    $("#news-content1-title").append(response.news[0].title);
+    $("#news-content2-title").empty();
+    $("#news-content2-title").append(response.news[1].title);
+    $("#news-content3-title").empty();
+    $("#news-content3-title").append(response.news[2].title);
   });
+
 
 
 
