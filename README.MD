@@ -28,12 +28,14 @@ Date        | Description                                               | Status
 
 <h2>Features</h2>
 
+* Global Numbers - Global COVID-19 Statistics are shown in the middle of the website after the countrySearch feature.
 * CountrySearch - COVID-Tracker allows users to search for specific countries and inquire on their COVID-19 statistics such as new cases and death rates.
 * AlternatingInfo - The COVID-19 Statistics of 4 randomized countries will be shown at the bottom of the page.
 
 <h3>Future Features</h3>
 
-* COVID-Tracker will eventually include COVID-19 vaccination data as more and more countries roll out their respective vaccination programmes.
+* COVID-Tracker will <b>eventually</b> include COVID-19 vaccination data as more and more countries roll out their respective vaccination programmes.
+* Though it should be noted, all efforts at the moment will be spent on bug fixing and ensuring the longevity of COVID-Tracker before any more new features will be considered.
 
 <h3>Online Validators Used</h3>
 
