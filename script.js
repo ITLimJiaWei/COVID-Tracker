@@ -87,6 +87,7 @@ $(document).ready(function () {
     $("#country-flag2").append("<img src='https://www.countryflags.io/"+ response[counter2].ISO2  + "/flat/64.png'>")
     $("#country-flag3").append("<img src='https://www.countryflags.io/"+ response[counter3].ISO2  + "/flat/64.png'>")
     $("#country-flag4").append("<img src='https://www.countryflags.io/"+ response[counter4].ISO2  + "/flat/64.png'>")
+    console.log("<img src='https://www.countryflags.io/"+ response[counter4].ISO2  + "/flat/64.png'>");
 
 
 
