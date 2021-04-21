@@ -758,15 +758,23 @@ $(document).ready(function () {
   $.ajax(news).done(function (response) {
     console.log(response);
     console.log(response.news[0].content);
+    console.log(response.news[0].imageinLocalStorage);
+    $("#news-img1").attr("src",response.news[0].imageinLocalStorage);
     
-    console.log(response.news[0].imageFileName);
-    $("#news-img1").attr("src",response.news[0].imageFileName);
     $("#news-content1-title").empty();
     $("#news-content1-title").append(response.news[0].title);
+    $("#news-content1-link").empty();
+    $("#news-content1-link").append('<a href="'+ response.news[0].link +'">Source</a>');
+
     $("#news-content2-title").empty();
     $("#news-content2-title").append(response.news[1].title);
+    $("#news-content2-link").empty();
+    $("#news-content2-link").append('<a href="'+ response.news[1].link +'">Source</a>');
+
     $("#news-content3-title").empty();
     $("#news-content3-title").append(response.news[2].title);
+    $("#news-content3-link").empty();
+    $("#news-content3-link").append('<a href="'+ response.news[2].link +'">Source</a>');
   });
 
 
