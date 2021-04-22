@@ -1,10 +1,9 @@
 <h1>COVID-Tracker</h1>
 
 Name: Lim Jia Wei <br>
-Website URL: <br>
+Website URL: https://itlimjiawei.github.io/COVID-Tracker/ <br>
 
 <h2>Description</h2>
-
 
 
 <h2>Update Table</h2>
@@ -16,6 +15,8 @@ Date        | Description                                               | Status
 10/4/2021   | Completed searchCountry function                          |  Done 
 18/4/2021   | Simplified feature set                                    |  Done 
 20/4/2021   | Randomized countries feature mostly ready                 |  Done 
+20/4/2021   | Added some error validation                               |  Done 
+
  
  
 
@@ -50,6 +51,7 @@ Date        | Description                                               | Status
 
 <h3>Devices and Resolutions Used</h3>
 
+* Dell XPS 13 9300 1920x1200 
 
 <h3>Browsers Used<h3>
 
