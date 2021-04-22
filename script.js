@@ -82,16 +82,13 @@ $(document).ready(function () {
     $("#country-random3").append(country3);
     $("#country-random4").append(country4);
 
-    console.log(response[counter1].ISO2);
     $("#country-flag1").append("<img src='https://www.countryflags.io/"+ response[counter1].ISO2  + "/flat/64.png'>")
     $("#country-flag2").append("<img src='https://www.countryflags.io/"+ response[counter2].ISO2  + "/flat/64.png'>")
     $("#country-flag3").append("<img src='https://www.countryflags.io/"+ response[counter3].ISO2  + "/flat/64.png'>")
     $("#country-flag4").append("<img src='https://www.countryflags.io/"+ response[counter4].ISO2  + "/flat/64.png'>")
-    console.log("<img src='https://www.countryflags.io/"+ response[counter4].ISO2  + "/flat/64.png'>");
 
 
 
-    console.log(countryArray);
 
     var countryRandom1 = {
       "url": "https://api.covid19api.com/live/country/"+ countryArray[0] +"/status/confirmed/date/" + currentDateTimeMinusOneISO,       
@@ -433,7 +430,6 @@ $(document).ready(function () {
         $("#country-search-desc-status2").append(avgCases);
         if (newCases <=500 && fatalityRate <=1 ) {
           $("#country-search-desc-status").append("well");
-          console.log("TEST2");
           $("#country-search-desc-rates").append("low");
 
         } else if (newCases <= 3000 && fatalityRate <= 5) {
@@ -473,8 +469,6 @@ $(document).ready(function () {
             totalCases += response[i].Confirmed;
             totalDeaths += response[i].Deaths;
           } 
-          console.log(currentDateMinusOneObj);
-          console.log(countrySearchDateObj);
           if (countrySearchDateObj.toString()===currentDateMinusOneObj.toString()) {
             totalCasesMinusOne += response[i].Confirmed; 
             totalDeathsMinusOne += response[i].Deaths;
@@ -517,7 +511,6 @@ $(document).ready(function () {
           $("#country-search-desc-rates").append("moderate");
 
         } else {
-          console.log("TEST2");
           $("#country-search-desc-status").append("relatively poorly");
           $("#country-search-desc-rates").append("high");
         }
@@ -550,7 +543,6 @@ $(document).ready(function () {
     };  
     
     $.ajax(countrySearchChart).done(function (response) {
-      console.log(response)     
     var labelArray = new Array();     
     var dataArray = new Array();                                          //countrySearchChart Function (Note: Add in US,UK etc functionality!!!!)
     
@@ -763,11 +755,7 @@ $(document).ready(function () {
   };
   
   $.ajax(news).done(function (response) {
-    console.log(response);
-    console.log(response.news[0].content);
-    console.log(response.news[0].imageinLocalStorage);
-    $("#news-img1").attr("src",response.news[0].imageinLocalStorage);
-    
+
     $("#news-content1-title").empty();
     $("#news-content1-title").append(response.news[0].title);
     $("#news-content1-link").empty();
