@@ -1,4 +1,4 @@
-<h1>COVID-Tracker</h1>
+<h1>COVID-Tracker (Deprecated)</h1>
 
 Name: Lim Jia Wei <br>
 Website URL: https://itlimjiawei.github.io/COVID-Tracker/ <br>
